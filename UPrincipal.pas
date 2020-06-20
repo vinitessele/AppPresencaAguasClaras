@@ -185,9 +185,9 @@ var
   url: string;
 begin
 {$IFDEF ANDROID}
-  url := 'https://drive.google.com/drive/folders/1lXLfF-gRGKGtSkbrDO24c-iQSMeQKgiF?usp=sharing';
+  url := 'https://drive.google.com/drive/folders/1xrrQ4BnRnkuKc4FdlwPucp8G8Z8y-9He?usp=sharing';
 {$ELSE}
-  url := 'https://drive.google.com/drive/folders/1lXLfF-gRGKGtSkbrDO24c-iQSMeQKgiF?usp=sharing';
+  url := 'https://drive.google.com/drive/folders/1xrrQ4BnRnkuKc4FdlwPucp8G8Z8y-9He?usp=sharing';
 {$ENDIF}
   OpenURL(url, False);
   Application.Terminate;
@@ -212,7 +212,9 @@ begin
   FAula.ShowModal(
     procedure(ModalResult: TModalResult)
     begin
-
+      sleep(500);
+      FAula := nil;
+      FAula.disposeof;
     end);
 end;
 
@@ -232,7 +234,7 @@ begin
 
   for I := 0 to 100 do
   begin
-    Sleep(100);
+    sleep(100);
   end;
 
   If not FileExists(strDestino) Then
@@ -241,10 +243,10 @@ begin
   End
   else
   begin
-    Sleep(2000);
+    sleep(2000);
     DM.FDConnection1.Connected := False;
     TFile.Delete(strDestino);
-    Sleep(2000);
+    sleep(2000);
     TFile.Copy(strPath, strDestino);
   end;
 {$ENDIF}
@@ -255,7 +257,7 @@ begin
   strDestino := IOUtils.TPath.Combine(AppPath, 'smyFile.db3');
   for I := 0 to 100 do
   begin
-    Sleep(100);
+    sleep(100);
   end;
   If not FileExists(strDestino) Then
   Begin
@@ -263,10 +265,10 @@ begin
   End
   else
   begin
-    Sleep(2000);
+    sleep(2000);
     DM.FDConnection1.Connected := False;
     TFile.Delete(strDestino);
-    Sleep(2000);
+    sleep(2000);
     TFile.Copy(strPath, strDestino);
   end;
 
@@ -280,7 +282,9 @@ begin
   FCadAluno.ShowModal(
     procedure(ModalResult: TModalResult)
     begin
-
+      sleep(500);
+      FCadAluno := nil;
+      FCadAluno.disposeof;
     end);
 end;
 
@@ -291,7 +295,9 @@ begin
   FCustos.ShowModal(
     procedure(ModalResult: TModalResult)
     begin
-
+      sleep(500);
+      FCustos := nil;
+      FCustos.disposeof;
     end);
 end;
 
@@ -302,7 +308,9 @@ begin
   FSobre.ShowModal(
     procedure(ModalResult: TModalResult)
     begin
-
+      sleep(500);
+      FSobre := nil;
+      FSobre.disposeof;
     end);
 end;
 
@@ -313,7 +321,9 @@ begin
   FLanctFalta.ShowModal(
     procedure(ModalResult: TModalResult)
     begin
-
+      sleep(500);
+      FLanctFalta := nil;
+      FLanctFalta.disposeof;
     end);
 end;
 
@@ -324,7 +334,9 @@ begin
   FRelatorios.ShowModal(
     procedure(ModalResult: TModalResult)
     begin
-
+      sleep(500);
+      FRelatorios := nil;
+      FRelatorios.disposeof;
     end);
 end;
 
@@ -335,7 +347,9 @@ begin
   FFaixa.ShowModal(
     procedure(ModalResult: TModalResult)
     begin
-
+      sleep(500);
+      FFaixa := nil;
+      FFaixa.disposeof;
     end);
 end;
 
@@ -343,7 +357,7 @@ procedure TFPrincipal.FormCreate(Sender: TObject);
 var
   vFoto: TStream;
 begin
-  versao_app := '1,0';
+  versao_app := '1,1';
   versao_server := '0.0';
   LabelVersao.Text := 'Versão ' + versao_app;
   LayoutUpdate.Margins.Top := FPrincipal.Height + 50;
@@ -367,7 +381,7 @@ begin
     var
       JsonObj: TJSONObject;
     begin
-      Sleep(2000);
+      sleep(2000);
       try
         RESTRequest1.Execute;
       except
@@ -383,7 +397,7 @@ begin
 
         versao_server := TJSONObject(JsonObj).GetValue('Versao').Value;
       finally
-        JsonObj.DisposeOf;
+        JsonObj.disposeof;
       end;
     end);
   t.OnTerminate := OnFinishUpdate;
